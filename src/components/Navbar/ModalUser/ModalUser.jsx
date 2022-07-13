@@ -7,7 +7,7 @@ import {
   UsernameStyled,
 } from './ModelUserStyles';
 
-const ModalUser = ({closeModal}) => {
+const ModalUser = () => {
   return (
     <ModalContainerStyled
       initial={{ translateX: 600 }}
@@ -18,7 +18,7 @@ const ModalUser = ({closeModal}) => {
     >
       <UsernameStyled>Hola Santiago Fernandez</UsernameStyled>
       <HrStyled />
-      <Link onClick={()=>closeModal(false)} to='/mis-ordenes'>Mis Ordenes</Link>
+      <Link to='/mis-ordenes'>Mis Ordenes</Link>
       <p>Cerrar Sesion</p>
     </ModalContainerStyled>
   );

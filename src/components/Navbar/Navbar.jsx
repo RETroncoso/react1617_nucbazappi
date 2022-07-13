@@ -23,6 +23,8 @@ function Navbar() {
     <NavbarContainerStyled>
       <AnimatePresence>
         {openModal && <ModalCart closeModal={setOpenModal} />}
+      </AnimatePresence>
+      <AnimatePresence>
         {openUser && <ModalUser closeModal={setOpenUser} />}
       </AnimatePresence>
       <div>
@@ -52,9 +54,7 @@ function Navbar() {
           </LinkContainerStyled>
         </CartNavStyled>
 
-        <UserNavStyled
-        closeModal={setOpenModal}
-        >
+        <UserNavStyled>
           <LinkContainerStyled
             onClick={() => {
               setOpenUser(!openUser);
