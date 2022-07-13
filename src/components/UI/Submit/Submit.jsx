@@ -1,14 +1,14 @@
-import React from 'react'
-import { InputSubmitStyled } from './SubmitStyles'
+import React from 'react';
+import { InputSubmitStyled } from './SubmitStyles';
 
-const Submit = ({value= 'Ingresar'}) => {
+const Submit = ({ value = ' Ingresar' }) => {
   return (
     <InputSubmitStyled
-        whileTap={{scale: 0.95}}
-        type='submit'
-        value={value}
+      whileTap={{ scale: 0.95 }}
+      type='submit'
+      value={value}
     ></InputSubmitStyled>
-  )
-}
+  );
+};
 
-export default Submit
+export default Submit;

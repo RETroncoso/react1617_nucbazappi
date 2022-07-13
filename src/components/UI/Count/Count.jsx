@@ -1,12 +1,8 @@
-import React from 'react'
-import { CountStyled } from './CountStyles'
+import React from 'react';
+import { CountStyled } from './CountStyles';
 
-const Count = ({children}) => {
-  return (
-    <CountStyled>
-{children}
-    </CountStyled>
-  )
-}
+const Count = ({ children }) => {
+  return <CountStyled>{children}</CountStyled>;
+};
 
-export default Count
+export default Count;

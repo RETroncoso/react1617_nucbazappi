@@ -1,15 +1,12 @@
-import React from "react";
-import { IncreaseStyled } from "./IncreaseStyled";
+import React from 'react';
+import { IncreaseStyled } from './IncreaseStyles';
 
-const Increase = ({children, secondary = false}) => {
+const Increase = ({ children, secondary = false }) => {
   return (
-    <IncreaseStyled
-    whileTap={{scale:0.95}}
-    secondary={secondary}
-    >
-        {children}
+    <IncreaseStyled whileTap={{ scale: 0.95 }} secondary={secondary}>
+      {children}
     </IncreaseStyled>
-  )
-}
+  );
+};
 
-export default Increase
+export default Increase;

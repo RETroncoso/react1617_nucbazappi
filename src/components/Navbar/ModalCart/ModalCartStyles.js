@@ -25,6 +25,7 @@ export const CloseButtonStyled = styled(motion.button)`
   font-weight: 400;
   cursor: pointer;
 `;
+
 export const TitleStyled = styled.div`
   margin: 5rem 0 2rem 0;
 `;
