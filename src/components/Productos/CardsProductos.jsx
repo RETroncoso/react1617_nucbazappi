@@ -1,20 +1,40 @@
 import React from 'react';
 import { ProductosContainer } from './CardsProductosStyles';
 import CardProducto from './CardProducto';
-import { products } from '../../data/Products';
+import {useSelector} from 'react-redux'
 
-const CardsProductos = () => {
+const CardsProductos = ({limit}) => {
+
+  let products = useSelector(state => state.products.products);
+
+  const selectedCategory = useSelector(state => state.categories.selectedCategory)
+
+  if (selectedCategory) {
+    products = { [selectedCategory]: products[selectedCategory] }
+  }
+
   return (
     <ProductosContainer>
-      {products.map(product => (
-        <CardProducto
-          key={product.id}
-          title={product.title}
-          imgSource={product.img}
-          desc={product.desc}
-          price={product.price}
+
+      {Object.entries(products).map(([ , foods]) =>
+      foods.map(
+        food =>
+        {
+          if (limit >= food.id || selectedCategory) {
+            return (
+              <CardProducto
+          key={food.id}
+          title={food.title}
+          imgSource={food.img}
+          desc={food.desc}
+          price={food.price}
         />
-      ))}
+            )
+          }return null
+        }
+      )
+      )
+      }
     </ProductosContainer>
   );
 };

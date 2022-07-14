@@ -11,7 +11,8 @@ export const CategoriasContainer = styled.div`
 `;
 
 export const CardCategoria = styled(motion.div)`
-  background-color: var(--gray-bg);
+  background-color: ${({ selected }) =>
+    selected ? 'var(--orange-bg)' : 'var(--gray-bg)'};
   width: 150px;
   border-radius: 15px;
   display: flex;
@@ -27,8 +28,6 @@ export const CardCategoria = styled(motion.div)`
   }
 
   :first-child {
-    background-color: var(--orange-bg);
-
     img {
       padding-top: 7px;
       padding-bottom: 7px;

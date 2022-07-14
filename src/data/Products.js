@@ -256,3 +256,15 @@ export const products = [
     category: 'Batidukis',
   },
 ];
+
+export const TotalProducts = products.length;
+
+export const Products = products.reduce((acc, product) => {
+  if (!acc[product.category]) {
+    acc[product.category] = [];
+  }
+
+  acc[product.category] = [...acc[product.category], product];
+
+  return acc;
+}, {});

@@ -1,3 +1,7 @@
+import {useRef, useState, useEffect} from 'react'
+import {useSelector} from 'react-redux'
+import { INITIAL_LIMIT } from '../../utils';
+
 import CardsRecomendacion from '../../components/Recomendados/CardsRecomendacion';
 
 import Categorias from '../../components/Categorias/Categorias';
@@ -15,11 +19,25 @@ import Button from '../../components/UI/Button/Button';
 import Hero from '../../components/Hero/Hero';
 
 function Home() {
+  const [limit, setLimit] = useState(INITIAL_LIMIT)
+  const [element, setElement] = useState(null)
+  const productsRef = useRef();
+
+  const selectedCategory = useSelector(
+    state => state.categories.selectedCategory
+  )
+
+  const totalProducts = useSelector(state => state.products.totalProducts)
+
+    useEffect(() => setElement(productsRef.current), [])
+
+    useEffect(() => setLimit(INITIAL_LIMIT), [selectedCategory])
+
   return (
     <HomeWrapper>
       {/* Hero Section */}
 
-      <Hero />
+      <Hero elementRef={element} />
 
       {/* Recomendados Section */}
       <RecomendadosWrapper>
@@ -34,24 +52,34 @@ function Home() {
       </CategoriasWrapper>
 
       {/* Populares Section*/}
-      <ProductosWrapper>
+      <ProductosWrapper ref={productsRef} >
         <h2>Nuestros productos</h2>
-        <CardsProductos />
-        <ButtonContainerStyled>
+        <CardsProductos
+          limit={limit}
+        />
+        {
+          !selectedCategory &&
+          <ButtonContainerStyled>
           <Button
-            /* onClick={} */
+           onClick={() => setLimit(
+            prevLimit => prevLimit - INITIAL_LIMIT
+           )}
             secondary 
-            /*  disabled={} */
+            disabled={INITIAL_LIMIT === limit}
           >
             <span>Ver menos</span>
           </Button>
           <Button
-            /* onClick={} */
-            /*  disabled={} */
+            onClick={() => setLimit(
+              prevLimit => prevLimit + INITIAL_LIMIT
+            )}
+           disabled={totalProducts <= limit}
           >
             Ver más
           </Button>
         </ButtonContainerStyled>
+        }
+        
       </ProductosWrapper>
     </HomeWrapper>
   );
