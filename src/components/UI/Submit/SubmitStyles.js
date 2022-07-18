@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-export const InputSubmitStyled = styled(motion.input)`
+export const ButtonSubmitStyled = styled(motion.button)`
   padding: 0.8rem 1.5rem;
   outline: none;
   border: none;

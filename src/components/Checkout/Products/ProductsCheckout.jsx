@@ -1,37 +1,47 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { formatPrice } from '../../../utils';
 
 import CardProductCheckout from '../../CardProductCheckout/CardProductCheckout';
+
 import {
-  CheckoutContainerPriceStyled,
-  CheckoutContainerProductosStyled,
-  CheckoutEnvioStyled,
-  CheckoutHrStyled,
-  CheckoutPriceTotalStyled,
-  CheckoutSubtotalStyled,
-  CheckoutTotalStyled,
+  ProductosContainerStyled,
+  ProductsTitleStyled,
+  CardsWrapperStyled,
+  PriceContainerStyled,
+  SubtotalStyled,
+  EnvioStyled,
+  HrStyled,
+  TotalStyled,
+  PriceTotalStyled,
 } from './ProductsCheckoutStyles';
 
 const ProductsCheckout = () => {
+ 
   return (
-    <CheckoutContainerProductosStyled>
-      <CardProductCheckout />
-      <CardProductCheckout />
-      <CheckoutContainerPriceStyled>
-        <CheckoutSubtotalStyled>
+    <ProductosContainerStyled>
+      <ProductsTitleStyled>Tu pedido</ProductsTitleStyled>
+      <CardsWrapperStyled>
+        Aca vamos a renderizar las cards
+      </CardsWrapperStyled>
+      <PriceContainerStyled>
+        <SubtotalStyled>
           <p>Subtotal</p>
-          <span>$4890</span>
-        </CheckoutSubtotalStyled>
-        <CheckoutEnvioStyled>
+          <span></span>
+        </SubtotalStyled>
+        <EnvioStyled>
           <p>Envío:</p>
-          <span>Gratis</span>
-        </CheckoutEnvioStyled>
-        <CheckoutHrStyled />
-        <CheckoutTotalStyled>
+          <span></span>
+        </EnvioStyled>
+        <HrStyled />
+        <TotalStyled>
           <p>Total:</p>
-          <CheckoutPriceTotalStyled>$4890</CheckoutPriceTotalStyled>
-        </CheckoutTotalStyled>
-      </CheckoutContainerPriceStyled>
-    </CheckoutContainerProductosStyled>
+          <PriceTotalStyled>
+            
+          </PriceTotalStyled>
+        </TotalStyled>
+      </PriceContainerStyled>
+    </ProductosContainerStyled>
   );
 };
 

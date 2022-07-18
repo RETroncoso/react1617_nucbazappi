@@ -47,7 +47,7 @@ const CheckoutForm = () => {
           </Input>
         </CheckoutFormStyled>
         <div>
-          <Submit value='Iniciar pedido' />
+          <Submit>Iniciar pedido</Submit>
         </div>
       </CheckoutFormContainerStyled>
     </CheckoutDatosStyled>

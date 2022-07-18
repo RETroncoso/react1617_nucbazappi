@@ -1,33 +1,42 @@
+
+import { BsPlusLg } from 'react-icons/bs';
+import { FaMinus } from 'react-icons/fa';
+import { IoMdTrash } from 'react-icons/io';
+
 import Count from '../UI/Count/Count';
 import Increase from '../UI/Increase/Increase';
+
 import {
-  CheckoutContainerStyled,
-  CheckoutInfoStyled,
-  CheckoutProductInfoStyled,
+  CardContainerStyled,
+  CardInfoStyled,
   PriceStyled,
   ProductTitleStyled,
+  TextStyled,
+  QuantityContainerStyled,
 } from './CardProductCheckoutStyles';
 
-const CardProductCheckout = () => {
+const CardProductCheckout = ({ img, title, desc, price, quantity, id }) => {
+
+
   return (
-    <CheckoutContainerStyled>
-      <CheckoutProductInfoStyled>
-        <img
-          src='https://res.cloudinary.com/dcatzxqqf/image/upload/v1656648432/coding/NucbaZappi/Assets/Bennazianna_t40kz2.png'
-          alt=''
-        />
-        <CheckoutInfoStyled>
-          <ProductTitleStyled>Bennazianna</ProductTitleStyled>
-          <p>Para todo el dia</p>
-          <PriceStyled>$870</PriceStyled>
-        </CheckoutInfoStyled>
-      </CheckoutProductInfoStyled>
-      <div>
-        <Increase>-</Increase>
-        <Count>1</Count>
-        <Increase secondary>+</Increase>
-      </div>
-    </CheckoutContainerStyled>
+    <CardContainerStyled>
+      <img src={img} alt={title} />
+      <CardInfoStyled>
+        <ProductTitleStyled>{title}</ProductTitleStyled>
+        <TextStyled>{desc}</TextStyled>
+        <PriceStyled>{price}</PriceStyled>
+      </CardInfoStyled>
+      <QuantityContainerStyled>
+        <Increase
+          bgColor='var(--btn-gradient-secondary)'>
+          {quantity === 1 ? <IoMdTrash /> : <FaMinus />}
+        </Increase>
+        <Count>{quantity}</Count>
+        <Increase>
+          <BsPlusLg />
+        </Increase>
+      </QuantityContainerStyled>
+    </CardContainerStyled>
   );
 };
 

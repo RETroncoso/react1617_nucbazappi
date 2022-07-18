@@ -1,20 +1,22 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const IncreaseStyled = styled(motion.button)`
-  background: #47311b;
-  border: none;
-  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 40px;
   height: 40px;
-  font-size: 1.3rem;
+  background: ${({ bgColor }) => bgColor || 'var(--btn-gradient)'};
+  border: none;
+  border-radius: 15px;
+  font-size: 1.1rem;
   font-weight: 800;
   color: white;
   cursor: pointer;
 
-  ${({ secondary }) =>
-    secondary &&
-    css`
-      background: var(--btn-gradient);
-    `}
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `;

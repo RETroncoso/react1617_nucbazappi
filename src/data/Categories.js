@@ -8,8 +8,8 @@ export const Categories = [
   {
     id: 2,
     img: 'https://res.cloudinary.com/dcatzxqqf/image/upload/v1656648466/coding/NucbaZappi/Categorias/hamburguesa_faykp7.png',
-    title: 'Hamburgesas',
-    category: 'Hamburgesas',
+    title: 'Hamburguesas',
+    category: 'Hamburguesas',
   },
   {
     id: 3,

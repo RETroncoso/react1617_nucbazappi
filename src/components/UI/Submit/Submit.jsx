@@ -1,13 +1,16 @@
 import React from 'react';
-import { InputSubmitStyled } from './SubmitStyles';
+import { ButtonSubmitStyled } from './SubmitStyles';
 
-const Submit = ({ value = ' Ingresar' }) => {
+const Submit = ({ children, onClick, disabled = false }) => {
   return (
-    <InputSubmitStyled
+    <ButtonSubmitStyled
       whileTap={{ scale: 0.95 }}
+      disabled={disabled}
+      onClick={onClick}
       type='submit'
-      value={value}
-    ></InputSubmitStyled>
+    >
+      {children}
+    </ButtonSubmitStyled>
   );
 };
 
