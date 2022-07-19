@@ -3,6 +3,8 @@ import Submit from '../../UI/Submit/Submit';
 import Count from '../../UI/Count/Count';
 import { MdOutlineClose } from 'react-icons/md';
 import { IoMdTrash } from 'react-icons/io';
+import * as cartActions from '../../../Redux/cart/cart-actions'
+import { useDispatch } from 'react-redux/es/exports';
 import {
   CloseButtonContainerStyled,
   ButtonContainerStyled,
@@ -18,8 +20,20 @@ import {
   MainContainerStyled,
   ProductsWrapperStyled
 } from './ModalCartStyles';
+import { useSelector } from 'react-redux';
+import ModalCartCard from './ModalCartCard';
+import { formatPrice } from '../../../utils/formatPrice';
 
-const ModalCart = ({ closeModal }) => {
+const ModalCart = () => {
+
+  const dispatch = useDispatch()
+
+  const {cartItems, shippingCost} = useSelector(state => state.cart);
+
+  const totalPrice = cartItems.reduce((acc, item) => {
+    return (acc += item.price * item.quantity);
+  }, 0);
+
   return (
     <ContainerStyled
       initial={{ translateX: 600 }}
@@ -32,7 +46,7 @@ const ModalCart = ({ closeModal }) => {
         <CloseButtonStyled
           className='close__modal '
           whileTap={{ scale: 0.95 }}
-          onClick={() => closeModal(false)}
+          onClick={() => dispatch(cartActions.toggleHiddenCart())}
         >
           <MdOutlineClose size='24px' />
         </CloseButtonStyled>
@@ -42,46 +56,42 @@ const ModalCart = ({ closeModal }) => {
         <h1>Tus Productos</h1>
         <Increase
             bgColor='#ff005c'
+            disabled={!cartItems.length}
           >
             <IoMdTrash />
           </Increase>
       </TitleStyled>
-      <ProductContainerStyled>
-        
-          <img
-            src='https://res.cloudinary.com/dcatzxqqf/image/upload/v1656648432/coding/NucbaZappi/Assets/Bennazianna_t40kz2.png'
-            alt=''
-          />
-          <div>
-            <p>Bennazianna</p>
-            <p>La más completa</p>
-            <PriceStyled>$3650</PriceStyled>
-          </div>
-          <div>
-            <Increase>-</Increase>
-            <Count>1</Count>
-            <Increase secondary>+</Increase>
-          </div>
-      
-        </ProductContainerStyled>
+
+      <ProductsWrapperStyled>
+
+      {cartItems.length ? (
+        cartItems.map(item => <ModalCartCard key={item.id} {...item}/> )
+      ) : (
+        <p>No seas amarrete, compra algo</p>
+      )}
+
+      </ProductsWrapperStyled>
+
         </MainContainerStyled>
 
         <PriceContainerStyled>
           <SubtotalStyled>
             <p>Subtotal:</p>
-            <span>$4890</span>
+            <span>{formatPrice(totalPrice)}</span>
           </SubtotalStyled>
           <EnvioStyled>
             <p>Envio</p>
-            <span>Gratis</span>
+            <span>{formatPrice(shippingCost)}</span>
           </EnvioStyled>
           <hr />
           <TotalStyled>
             <p>Total:</p>
-            <PriceStyled>$4890</PriceStyled>
+            <PriceStyled>{formatPrice(totalPrice + shippingCost)}</PriceStyled>
           </TotalStyled>
           <ButtonContainerStyled>
-            <Submit>Iniciar pedido</Submit>
+            <Submit
+            disabled={!cartItems.length}
+            >Iniciar pedido</Submit>
           </ButtonContainerStyled>
         </PriceContainerStyled>
   

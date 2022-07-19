@@ -1,5 +1,7 @@
 import React from 'react';
-
+import {useDispatch} from 'react-redux/es/exports'
+import * as cartActions from '../../../Redux/cart/cart-actions'
+import { formatPrice } from '../../../utils/formatPrice';
 
 
 import { BsPlusLg } from 'react-icons/bs';
@@ -20,13 +22,15 @@ import {
 
 const ModalCartCard = ({ img, title, desc, price, quantity, id }) => {
 
+  const dispatch = useDispatch();
+
   return (
     <ProductContainerStyled>
       <img src={img} alt={title} />
       <TextContainerStyled>
         <CardTitleStyled>{title}</CardTitleStyled>
         <TextStyled>{desc}</TextStyled>
-        <PriceStyled>{(price)}</PriceStyled>
+        <PriceStyled>{formatPrice(price)}</PriceStyled>
       </TextContainerStyled>
       <QuantityContainerStyled>
         <Increase
@@ -36,7 +40,9 @@ const ModalCartCard = ({ img, title, desc, price, quantity, id }) => {
         </Increase>
         <Count>{quantity}</Count>
         <Increase>
-          <BsPlusLg />
+          <BsPlusLg 
+            onClick={() => dispatch(cartActions.addToCart({img, title, desc, price, id}))}
+          />
         </Increase>
       </QuantityContainerStyled>
     </ProductContainerStyled>

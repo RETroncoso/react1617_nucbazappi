@@ -2,17 +2,17 @@ import React from 'react';
 import CardRecomendacion from './CardRecomendacion';
 import { CardsContainer } from './CardsRecomendacionStyled';
 import { recomendados } from '../../data/Recomendados';
+import { useSelector } from 'react-redux';
 
 const CardsRecomendacion = () => {
+
+  const recommended = useSelector(state => state.recommended.recommended)
+
   return (
-    <CardsContainer gridLength={recomendados.length}>
-      {recomendados.map(recomendado => (
+    <CardsContainer gridLength={recommended.length}>
+      {recommended.map(recomendado => (
         <CardRecomendacion
-          key={recomendado.id}
-          title={recomendado.title}
-          imageSource={recomendado.img}
-          desc={recomendado.desc}
-          price={recomendado.price}
+          key={recomendado.id} {...recomendado}
         />
       ))}
     </CardsContainer>

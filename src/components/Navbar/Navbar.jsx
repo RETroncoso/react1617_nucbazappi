@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-
+import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { Link } from 'react-router-dom';
+
+import * as cartActions from '../../Redux/cart/cart-actions'
 
 import { FaUserAlt, FaShoppingCart } from 'react-icons/fa';
 import { HiHome } from 'react-icons/hi';
@@ -11,19 +13,43 @@ import {
   CartNavStyled,
   LinkContainerStyled,
   LinksContainerStyled,
+  ModalOverlayStyled,
   NavbarContainerStyled,
   UserNavStyled,
 } from './NavbarStyles';
 
 function Navbar() {
-  const [openModal, setOpenModal] = useState();
   const [openUser, setOpenUser] = useState();
+
+  const hiddenCart = useSelector(state => state.cart.hidden)
+
+  const dispatch = useDispatch()
+
+  const totalCartItenms = useSelector(state => state.cart.cartItems).reduce((acc, item) => (acc += item.quantity), 0)
+
+  useEffect(() => {
+    if(!hiddenCart) {
+      dispatch(cartActions.toggleHiddenCart())
+    }
+  },[dispatch])
 
   return (
     <NavbarContainerStyled>
+      {
+        !hiddenCart && (
+          <ModalOverlayStyled
+            onClick={() => !hiddenCart && dispatch(cartActions.toggleHiddenCart())}
+            isHidden={hiddenCart}
+          />
+        )
+      }
       <AnimatePresence>
-        {openModal && <ModalCart closeModal={setOpenModal} />}
+         {
+      !hiddenCart && <ModalCart/>
+    }
       </AnimatePresence>
+   
+
       <AnimatePresence>
         {openUser && <ModalUser closeModal={setOpenUser} />}
       </AnimatePresence>
@@ -45,12 +71,10 @@ function Navbar() {
 
         <CartNavStyled>
           <LinkContainerStyled
-            onClick={() => {
-              setOpenModal(true);
-            }}
+          onClick={() => dispatch(cartActions.toggleHiddenCart())}
           >
             <FaShoppingCart />
-            <span>1</span>
+            <span>{totalCartItenms}</span>
           </LinkContainerStyled>
         </CartNavStyled>
 
