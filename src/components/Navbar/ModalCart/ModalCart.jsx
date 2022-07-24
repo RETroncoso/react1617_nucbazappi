@@ -23,10 +23,13 @@ import {
 import { useSelector } from 'react-redux';
 import ModalCartCard from './ModalCartCard';
 import { formatPrice } from '../../../utils/formatPrice';
+import { useNavigate } from 'react-router-dom';
+
 
 const ModalCart = () => {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const {cartItems, shippingCost} = useSelector(state => state.cart);
 
@@ -56,7 +59,8 @@ const ModalCart = () => {
         <h1>Tus Productos</h1>
         <Increase
             bgColor='#ff005c'
-            disabled={!cartItems.length}
+            disabled={cartItems.length === 0}
+            onClick={() => dispatch(cartActions.clearCart())}
           >
             <IoMdTrash />
           </Increase>
@@ -90,7 +94,11 @@ const ModalCart = () => {
           </TotalStyled>
           <ButtonContainerStyled>
             <Submit
-            disabled={!cartItems.length}
+            disabled={cartItems.length === 0}
+            onClick={() => {
+              navigate('/checkout');
+              dispatch(cartActions.toggleHiddenCart())
+            }}
             >Iniciar pedido</Submit>
           </ButtonContainerStyled>
         </PriceContainerStyled>

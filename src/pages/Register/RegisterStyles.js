@@ -1,28 +1,23 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { Form as FormikForm } from 'formik';
 
 export const LoginContainerStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
 `;
 
-export const LoginFormStyled = styled.form`
+export const Form = styled(FormikForm)`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 0 2rem;
   gap: 20px;
-`;
-
-export const LoginInputStyled = styled.input`
-  background-color: var(--gray-bg);
-  width: 300px;
-  padding: 1.5rem 2rem;
-  border-radius: 15px;
-  border: none;
 `;
 
 export const LoginButtonGoogleStyled = styled.button`
@@ -44,7 +39,7 @@ export const LoginEmailStyled = styled(Link)`
     color: var(--orange);
 
     :hover {
-      color: white;
+      text-decoration: underline;
       transition: all 0.25s ease-out;
     }
   }

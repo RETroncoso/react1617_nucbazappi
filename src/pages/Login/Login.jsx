@@ -1,4 +1,6 @@
+import React, { useEffect } from 'react';
 import Submit from '../../components/UI/Submit/Submit';
+import { signInWithGoogle } from '../../firebase/firebase-utils';
 import {
   LoginButtonGoogleStyled,
   LoginContainerStyled,
@@ -6,8 +8,21 @@ import {
   LoginFormStyled,
   LoginInputStyled,
 } from './LoginStyles';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+
+  const {currentUser} = useSelector(state => state.user)
+
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    if(currentUser){
+      navigate('/')
+    }
+  },[currentUser, navigate])
+
   return (
     <LoginContainerStyled>
       <h1>Iniciar Sesión</h1>
@@ -15,7 +30,9 @@ const Login = () => {
         <LoginInputStyled type='text' placeholder='Email' />
         <LoginInputStyled type='password' placeholder='Password' />
         <p>O podés ingresar con</p>
-        <LoginButtonGoogleStyled>
+        <LoginButtonGoogleStyled
+          onClick={() => signInWithGoogle()}
+        >
           <img
             src='https://res.cloudinary.com/dcatzxqqf/image/upload/v1656648432/coding/NucbaZappi/Assets/google-icon_jgdcr1.png'
             alt=''

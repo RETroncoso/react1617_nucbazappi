@@ -1,7 +1,17 @@
 import React from 'react';
 import { SHIPPING_COST } from '../../utils/constants';
-import { ADD_TO_CART, TOGGLE_HIDDEN_CART } from './cart-actions';
-import { addItemToCart } from './cart-utils';
+import {
+  ADD_TO_CART,
+  CLEAR_CART,
+  removeFromCart,
+  REMOVE_FROM_CART,
+  TOGGLE_HIDDEN_CART,
+} from './cart-actions';
+import {
+  addItemToCart,
+  removeItemFromCart,
+  resetShippingCost,
+} from './cart-utils';
 
 const INITIAL_STATE = {
   cartItems: [],
@@ -16,6 +26,18 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         cartItems: addItemToCart(state.cartItems, action.payload),
         shippingCost: SHIPPING_COST,
+      };
+    case REMOVE_FROM_CART:
+      return {
+        ...state,
+        cartItems: removeItemFromCart(state.cartItems, action.payload),
+        shippingCost: resetShippingCost(state.cartItems, SHIPPING_COST),
+      };
+    case CLEAR_CART:
+      return {
+        ...state,
+        cartItems: [],
+        shippingCost: 0,
       };
     case TOGGLE_HIDDEN_CART:
       return {

@@ -72,14 +72,17 @@ export const CartNavStyled = styled.div`
 `;
 
 export const UserNavStyled = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 15px;
   cursor: pointer;
   span {
     color: white;
     font-size: 1rem;
     margin-right: 20px;
+  }
+`;
+
+export const SpanStyled = styled.span`
+  &:hover {
+    text-decoration: underline;
   }
 `;

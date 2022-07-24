@@ -35,6 +35,7 @@ const ModalCartCard = ({ img, title, desc, price, quantity, id }) => {
       <QuantityContainerStyled>
         <Increase
           bgColor='var(--btn-gradient-secondary)'
+          onClick={() => dispatch(cartActions.removeFromCart(id))}
         >
           {quantity === 1 ? <IoMdTrash /> : <FaMinus />}
         </Increase>

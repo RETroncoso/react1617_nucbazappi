@@ -1,5 +1,8 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import * as userActions from '../../../Redux/user/user-actions'
 
+import { auth } from '../../../firebase/firebase-utils';
 import { Link } from 'react-router-dom';
 import {
   HrStyled,
@@ -8,6 +11,9 @@ import {
 } from './ModelUserStyles';
 
 const ModalUser = () => {
+  const { currentUser } = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
   return (
     <ModalContainerStyled
       initial={{ translateX: 600 }}
@@ -16,10 +22,14 @@ const ModalUser = () => {
       transition={{ duration: 0.5 }}
       key='cart-user'
     >
-      <UsernameStyled>Hola Santiago Fernandez</UsernameStyled>
+      <UsernameStyled>{`Hola ${currentUser?.displayName}`}</UsernameStyled>
       <HrStyled />
       <Link to='/mis-ordenes'>Mis Ordenes</Link>
-      <p>Cerrar Sesion</p>
+
+      <span
+      onClick={() => auth.signOut().then(() => dispatch(userActions.toggleMenuHidden())) }
+      >Cerrar Sesion</span>
+
     </ModalContainerStyled>
   );
 };

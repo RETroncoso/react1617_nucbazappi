@@ -1,13 +1,22 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap');
 
     :root {
     --orange-bg: #2f2618;
     --orange: #ff9d01;
+    --magenta: #FF005C;
     --gray-bg: #2b2b2c;
   --btn-gradient: linear-gradient(83deg, #ffa100, #fb103d);
+  --btn-gradient-secondary: linear-gradient(140deg, #3B3022, #3B2329);
+  }
+
+  html{
+    scroll-behavior: smooth;
+  }
+
+  html{
+    scroll-behavior: smooth;
   }
 
     body {

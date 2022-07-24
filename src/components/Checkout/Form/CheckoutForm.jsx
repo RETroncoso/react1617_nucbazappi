@@ -1,19 +1,27 @@
 import React from 'react';
+
+import {
+  checkoutInitialValues,
+  checkoutValidationSchema,
+} from '../../../formik';
+
 import Input from '../../UI/Input/Input';
 import Submit from '../../UI/Submit/Submit';
-import {
-  CheckoutDatosStyled,
-  CheckoutFormContainerStyled,
-  CheckoutFormStyled,
-} from './CheckoutFormStyles';
+
+import { CheckoutDatosStyled, Formik, Form } from './CheckoutFormStyles';
 
 const CheckoutForm = () => {
   return (
     <CheckoutDatosStyled>
       <h2>Ingresá tus datos</h2>
-      <CheckoutFormContainerStyled>
-        <CheckoutFormStyled>
+      <Formik
+        initialValues={checkoutInitialValues}
+        validationSchema={checkoutValidationSchema}
+        onSubmit={values => console.log(values)}
+      >
+        <Form>
           <Input
+            name='name'
             htmlFor='nombre'
             type='text'
             id='nombre'
@@ -22,6 +30,7 @@ const CheckoutForm = () => {
             Nombre
           </Input>
           <Input
+          name='cellphone'
             htmlFor='celular'
             type='text'
             id='celular'
@@ -30,6 +39,7 @@ const CheckoutForm = () => {
             Celular
           </Input>
           <Input
+          name='location'
             htmlFor='localidad'
             type='text'
             id='localidad'
@@ -38,6 +48,7 @@ const CheckoutForm = () => {
             Localidad
           </Input>
           <Input
+          name='address'
             htmlFor='direccion'
             type='text'
             id='dirección'
@@ -45,11 +56,12 @@ const CheckoutForm = () => {
           >
             Dirección
           </Input>
-        </CheckoutFormStyled>
+        
         <div>
           <Submit>Iniciar pedido</Submit>
         </div>
-      </CheckoutFormContainerStyled>
+        </Form>
+      </Formik>
     </CheckoutDatosStyled>
   );
 };

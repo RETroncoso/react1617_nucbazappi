@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, MotionConfig } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
+
 
 import * as cartActions from '../../Redux/cart/cart-actions'
+import * as userActions from '../../Redux/user/user-actions'
 
 import { FaUserAlt, FaShoppingCart } from 'react-icons/fa';
 import { HiHome } from 'react-icons/hi';
@@ -15,6 +19,7 @@ import {
   LinksContainerStyled,
   ModalOverlayStyled,
   NavbarContainerStyled,
+  SpanStyled,
   UserNavStyled,
 } from './NavbarStyles';
 
@@ -22,8 +27,11 @@ function Navbar() {
   const [openUser, setOpenUser] = useState();
 
   const hiddenCart = useSelector(state => state.cart.hidden)
+  const { hiddenMenu, currentUser } = useSelector(state => state.user);
 
   const dispatch = useDispatch()
+
+  const navigate = useNavigate()
 
   const totalCartItenms = useSelector(state => state.cart.cartItems).reduce((acc, item) => (acc += item.quantity), 0)
 
@@ -43,16 +51,8 @@ function Navbar() {
           />
         )
       }
-      <AnimatePresence>
-         {
-      !hiddenCart && <ModalCart/>
-    }
-      </AnimatePresence>
-   
-
-      <AnimatePresence>
-        {openUser && <ModalUser closeModal={setOpenUser} />}
-      </AnimatePresence>
+      <AnimatePresence>{!hiddenCart && <ModalCart/>}</AnimatePresence>
+      <AnimatePresence>{!hiddenMenu && <ModalUser />}</AnimatePresence>
       <div>
         <Link to='/'>
           <img
@@ -62,16 +62,20 @@ function Navbar() {
         </Link>
       </div>
       <LinksContainerStyled>
+<motion.div whileTap={{ scale: 0.97 }}>
         <Link to='/'>
           <LinkContainerStyled home>
             <HiHome />
           </LinkContainerStyled>
           Home
         </Link>
+</motion.div>
 
         <CartNavStyled>
           <LinkContainerStyled
-          onClick={() => dispatch(cartActions.toggleHiddenCart())}
+          onClick={() => {dispatch(cartActions.toggleHiddenCart());
+            !hiddenMenu && dispatch(userActions.toggleMenuHidden())}
+          }
           >
             <FaShoppingCart />
             <span>{totalCartItenms}</span>
@@ -80,11 +84,16 @@ function Navbar() {
 
         <UserNavStyled>
           <LinkContainerStyled
-            onClick={() => {
-              setOpenUser(!openUser);
-            }}
+            onClick={() =>
+              currentUser
+              ? dispatch(userActions.toggleMenuHidden())
+              : navigate('/register')
+                
+            }
           >
-            <span>¡Hola Santi!</span>
+            <SpanStyled> {
+                currentUser ? `${currentUser.displayName}` : 'Inicia sesión'
+              } </SpanStyled>
             <FaUserAlt />
           </LinkContainerStyled>
         </UserNavStyled>

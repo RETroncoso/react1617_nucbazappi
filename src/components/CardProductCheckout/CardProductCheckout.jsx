@@ -2,6 +2,8 @@
 import { BsPlusLg } from 'react-icons/bs';
 import { FaMinus } from 'react-icons/fa';
 import { IoMdTrash } from 'react-icons/io';
+import { useDispatch } from 'react-redux';
+import * as cartActions from '../../Redux/cart/cart-actions'
 
 import Count from '../UI/Count/Count';
 import Increase from '../UI/Increase/Increase';
@@ -17,6 +19,7 @@ import {
 
 const CardProductCheckout = ({ img, title, desc, price, quantity, id }) => {
 
+  const dispatch = useDispatch();
 
   return (
     <CardContainerStyled>
@@ -28,11 +31,15 @@ const CardProductCheckout = ({ img, title, desc, price, quantity, id }) => {
       </CardInfoStyled>
       <QuantityContainerStyled>
         <Increase
-          bgColor='var(--btn-gradient-secondary)'>
+          bgColor='var(--btn-gradient-secondary)'
+          onClick={() => dispatch(cartActions.removeFromCart(id))}
+          >
           {quantity === 1 ? <IoMdTrash /> : <FaMinus />}
         </Increase>
         <Count>{quantity}</Count>
-        <Increase>
+        <Increase
+        onClick={() => dispatch(cartActions.addToCart({ img, title, desc, price, id}))}
+        >
           <BsPlusLg />
         </Increase>
       </QuantityContainerStyled>
