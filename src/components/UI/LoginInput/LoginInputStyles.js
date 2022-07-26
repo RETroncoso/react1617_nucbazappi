@@ -13,6 +13,18 @@ export const LoginInputStyled = styled.input`
   border-radius: 15px;
   border: ${({ isError }) => (isError ? '1px solid #fb103d ' : 'none')};
   outline: none;
+  caret-color: white;
+
+  ::placeholder {
+    opacity: 80%;
+  }
+  -webkit-text-fill-color: white;
+
+  :-webkit-autofill,
+  :-webkit-autofill:hover,
+  :-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px var(--gray-bg) inset;
+  }
 `;
 
 export const ErrorMessageStyled = styled.p`

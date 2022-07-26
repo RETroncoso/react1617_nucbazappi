@@ -8,6 +8,7 @@ import Checkout from '../pages/Checkout/Checkout';
 import MisOrdenes from '../pages/MisOrdenes/MisOrdenes';
 import PageNotFound from '../pages/PageNotFound/PageNotFound';
 import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute';
+import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 
 function Routes() {
   return (
@@ -15,20 +16,19 @@ function Routes() {
       <Route path='/' element={<Home />} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
+      <Route path='/forgot-password' element={<ForgotPassword />} />
       <Route path='/mis-ordenes' element={<MisOrdenes />} />
       <Route path='/felicitaciones' element={<Felicitaciones />} />
       <Route path='/resumen' element={<Resumen />} />
 
-      <Route path='/checkout' element={<Checkout />} />
-
-      {/* <Route
+      <Route
         path='/checkout'
         element={
           <ProtectedRoute redirectTo='/register'>
             <Checkout />
           </ProtectedRoute>
         }
-      /> */}
+      />
 
       <Route path='*' element={<PageNotFound />} />
     </ReactDomRoutes>

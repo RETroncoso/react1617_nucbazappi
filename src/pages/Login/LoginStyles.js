@@ -1,14 +1,16 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Form as FormikForm } from 'formik';
 
 export const LoginContainerStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
 `;
 
-export const LoginFormStyled = styled.form`
+export const Form = styled(FormikForm)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,12 +19,15 @@ export const LoginFormStyled = styled.form`
   gap: 20px;
 `;
 
-export const LoginInputStyled = styled.input`
-  background-color: var(--gray-bg);
-  width: 300px;
-  padding: 1.5rem 2rem;
-  border-radius: 15px;
-  border: none;
+export const LoginPasswordStyled = styled.p`
+  margin: 0;
+
+  color: var(--magenta);
+
+  :hover {
+    text-decoration: underline;
+    transition: all 0.25s ease-out;
+  }
 `;
 
 export const LoginButtonGoogleStyled = styled.button`
@@ -39,24 +44,11 @@ export const LoginButtonGoogleStyled = styled.button`
   cursor: pointer;
 `;
 
-export const LoginEmailStyled = styled(Link)`
-  & p {
-    color: var(--orange);
+export const LoginEmailStyled = styled.p`
+  color: var(--orange);
 
-    :hover {
-      color: white;
-      transition: all 0.25s ease-out;
-    }
+  :hover {
+    text-decoration: underline;
+    transition: all 0.25s ease-out;
   }
-`;
-export const LoginInputSubmitStyled = styled.input`
-  padding: 0.8rem 1.5rem;
-  outline: none;
-  border: none;
-  border-radius: 10px;
-  background: var(--btn-gradient);
-  color: white;
-  text-transform: uppercase;
-  font-weight: 400;
-  cursor: pointer;
 `;
