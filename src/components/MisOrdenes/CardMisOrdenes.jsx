@@ -16,17 +16,17 @@ import {
 const CardMisOrdenes = ({createdAt, status, total, id}) => {
   const navigate = useNavigate()
 
-  // const createOrderAt = new Timestamp(
-  //   createdAt?.seconds,
-  //   createdAt?.nanoseconds
-  // ).toDate();
+  const createOrderAt = new Timestamp(
+    createdAt?.seconds,
+    createdAt?.nanoseconds
+  ).toDate();
 
   return (
     <PedidoContainerStyled onClick={() => navigate(`/resumen/${id}`)} >
       <TextContainerStyled>
         <TitleStyled>ID de la orden: #{id?.slice(0,7)}  </TitleStyled>
-        {/* <IdStyled>Fecha {formatDate(createOrderAt)}hs</IdStyled> */}
-        <PriceStyled>Precio acá</PriceStyled>
+        <IdStyled>Fecha {formatDate(createOrderAt)}hs</IdStyled>
+        <PriceStyled>{formatPrice(total)}</PriceStyled>
       </TextContainerStyled>
       <OrderStatus status={status} />
     </PedidoContainerStyled>

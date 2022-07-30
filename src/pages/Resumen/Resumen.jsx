@@ -23,7 +23,9 @@ const Resumen = () => {
   const currentUser = useSelector(state => state.user.currentUser);
   const orders = useSelector(state => state.orders.orders);
   const dispatch = useDispatch();
-  const {orderId} = useParams
+  const {orderId} = useParams()
+
+  console.log(orderId);
 
   useEffect(() => {
     if(!orders.length && currentUser?.Id) {

@@ -75,7 +75,7 @@ export const createOrderDocument = async order => {
   const snapShot = await getDoc(orderRef);
 
   if (!snapShot.exists()) {
-    const createdAd = new Date();
+    const createdAt = new Date();
 
     try {
       await setDoc(doc(firestore, `orders/${order.orderId}`), {
@@ -88,7 +88,7 @@ export const createOrderDocument = async order => {
         shippingCost: order.shippingCost,
         total: order.total,
         status: 'pending',
-        createdAd,
+        createdAt,
       });
     } catch (error) {
       console.log('Error creating order', error.message);
