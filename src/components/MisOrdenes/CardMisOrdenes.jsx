@@ -1,40 +1,34 @@
-import { AiOutlineCheck } from 'react-icons/ai';
-import { BiTime } from 'react-icons/bi';
-import { MdOutlineCancel } from 'react-icons/md';
+
+import { Timestamp } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import { formatDate } from '../../utils/formatDate';
+import { formatPrice } from '../../utils/formatPrice'
+import OrderStatus from '../UI/OrderStatus/OrderStatus';
+
 import {
-  CancelStyled,
-  CheckStyled,
   IdStyled,
   PedidoContainerStyled,
-  PendingStyled,
   PriceStyled,
   TextContainerStyled,
   TitleStyled,
 } from './CardMisOrdenesStyles';
 
-const CardMisOrdenes = ({ title, price, pedido, status }) => {
+const CardMisOrdenes = ({createdAt, status, total, id}) => {
+  const navigate = useNavigate()
+
+  // const createOrderAt = new Timestamp(
+  //   createdAt?.seconds,
+  //   createdAt?.nanoseconds
+  // ).toDate();
+
   return (
-    <PedidoContainerStyled>
+    <PedidoContainerStyled onClick={() => navigate(`/resumen/${id}`)} >
       <TextContainerStyled>
-        <TitleStyled>{title}</TitleStyled>
-        <IdStyled>Fecha {pedido}</IdStyled>
-        <PriceStyled>${price}</PriceStyled>
+        <TitleStyled>ID de la orden: #{id?.slice(0,7)}  </TitleStyled>
+        {/* <IdStyled>Fecha {formatDate(createOrderAt)}hs</IdStyled> */}
+        <PriceStyled>Precio acá</PriceStyled>
       </TextContainerStyled>
-      {status === 'check' && (
-        <CheckStyled>
-          <AiOutlineCheck />
-        </CheckStyled>
-      )}
-      {status === 'pending' && (
-        <PendingStyled>
-          <BiTime />
-        </PendingStyled>
-      )}
-      {status === 'cancel' && (
-        <CancelStyled>
-          <MdOutlineCancel />
-        </CancelStyled>
-      )}
+      <OrderStatus status={status} />
     </PedidoContainerStyled>
   );
 };

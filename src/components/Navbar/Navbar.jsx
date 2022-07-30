@@ -56,7 +56,7 @@ function Navbar() {
       <div>
         <Link to='/'>
           <img
-            src='https://res.cloudinary.com/dcatzxqqf/image/upload/v1656648432/coding/NucbaZappi/Assets/nucba-zappi-icon_oe3ark.png'
+            src='https://res.cloudinary.com/dcatzxqqf/image/upload/v1658797659/coding/NucbaZappi/Assets/nucba-zappi-icon_oe3ark_xmvab5.png'
             alt=''
           />
         </Link>

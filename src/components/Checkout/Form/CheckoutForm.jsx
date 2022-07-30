@@ -4,21 +4,46 @@ import {
   checkoutInitialValues,
   checkoutValidationSchema,
 } from '../../../formik';
+import Loader from '../../UI/Loader/Loader'
 
 import Input from '../../UI/Input/Input';
 import Submit from '../../UI/Submit/Submit';
 
 import { CheckoutDatosStyled, Formik, Form } from './CheckoutFormStyles';
+import { useDispatch } from 'react-redux';
+import * as orderActions from '../../../Redux/orders/order-actions'
+import * as cartActions from '../../../Redux/cart/cart-actions'
+import { useNavigate } from 'react-router-dom';
 
-const CheckoutForm = () => {
+const CheckoutForm = ({cartItems, price, shippingCost}) => {
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   return (
     <CheckoutDatosStyled>
       <h2>Ingresá tus datos</h2>
       <Formik
         initialValues={checkoutInitialValues}
         validationSchema={checkoutValidationSchema}
-        onSubmit={values => console.log(values)}
+        onSubmit={ async values => {
+          const orderData = {
+            cartItems,
+            price,
+            shippingCost,
+            total: price + shippingCost,
+            shippingDetails: {...values},
+          };
+          try {
+            await dispatch(orderActions.createOrder(orderData));
+            navigate('/felicitaciones');
+            dispatch(cartActions.clearCart());
+          } catch (error) {
+            alert('Error al crear la orden');
+          }
+        }}
       >
+        {({ isSubmitting }) => (
         <Form>
           <Input
             name='name'
@@ -58,9 +83,12 @@ const CheckoutForm = () => {
           </Input>
         
         <div>
-          <Submit>Iniciar pedido</Submit>
+        <Submit>
+                {isSubmitting ? <Loader /> : 'Iniciar Pedido'}
+              </Submit>
         </div>
         </Form>
+        )}
       </Formik>
     </CheckoutDatosStyled>
   );

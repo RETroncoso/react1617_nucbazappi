@@ -8,7 +8,17 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from 'firebase/auth';
-import { doc, getDoc, setDoc, getFirestore } from 'firebase/firestore';
+import {
+  doc,
+  getDoc,
+  setDoc,
+  getFirestore,
+  query,
+  collection,
+  where,
+  orderBy,
+  getDocs,
+} from 'firebase/firestore';
 import {
   actionCodeSettingsForgotPassword,
   firebaseConfig,
@@ -58,6 +68,60 @@ export const resetPassword = email =>
   sendPasswordResetEmail(auth, email, actionCodeSettingsForgotPassword).then(
     () => alert(`Mail de recupero de contraseña enviado a ${email} `)
   );
+
+export const createOrderDocument = async order => {
+  if (!order) return;
+  const orderRef = doc(firestore, `orders/${order.orderId}`);
+  const snapShot = await getDoc(orderRef);
+
+  if (!snapShot.exists()) {
+    const createdAd = new Date();
+
+    try {
+      await setDoc(doc(firestore, `orders/${order.orderId}`), {
+        userId: order.userId,
+        shippingDetails: {
+          ...order.shippingDetails,
+        },
+        items: [...order.cartItems],
+        price: order.price,
+        shippingCost: order.shippingCost,
+        total: order.total,
+        status: 'pending',
+        createdAd,
+      });
+    } catch (error) {
+      console.log('Error creating order', error.message);
+    }
+  }
+  return orderRef;
+};
+
+export const getOrders = async userId => {
+  if (!userId)
+    throw new Error(
+      'Upss, algo salío mal. No hay ordenes sin usuario, es como querer jugar al fútbol sin una pelota'
+    );
+
+  const getOrdersQuery = query(
+    collection(firestore, 'orders'),
+    where('userId', '==', userId),
+    orderBy('createdAt', 'desc')
+  );
+
+  let orders = await getDocs(getOrdersQuery)
+    .then(querySnapshot => {
+      let orders = [];
+      querySnapshot.forEach(doc => {
+        console.log('doc: ' + doc);
+        orders = [...orders, { id: doc.id, ...doc.data() }];
+      });
+      return orders;
+    })
+    .catch(error => console.error('Error al obtener las ordenes', error));
+
+  return orders;
+};
 
 export const firestore = getFirestore(app);
 

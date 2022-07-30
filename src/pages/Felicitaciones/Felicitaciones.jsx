@@ -1,11 +1,16 @@
-import Link from '../../components/UI/Link/Link';
+import { useNavigate } from 'react-router-dom';
+
+import Button from '../../components/UI/Button/Button';
+
 import {
   ContainerInfoStyled,
   PatternStyled,
   TextStyled,
+  TitleStyled,
 } from './FelicitacionesStyled';
 
 const Felicitaciones = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <TextStyled>
@@ -14,10 +19,10 @@ const Felicitaciones = () => {
           alt=''
         />
         <ContainerInfoStyled>
-          <h1>¡!</h1>
+          <TitleStyled>¡Felicitaciones!</TitleStyled>
           <p>Tu pedido fué realizado</p>
         </ContainerInfoStyled>
-        <Link to='/resumen'></Link>
+        <Button onClick={() => navigate('/mis-ordenes')}>Volver</Button>
       </TextStyled>
       <PatternStyled
         src='https://res.cloudinary.com/dcatzxqqf/image/upload/v1656648434/coding/NucbaZappi/Assets/Pattern_lt5uru.png'

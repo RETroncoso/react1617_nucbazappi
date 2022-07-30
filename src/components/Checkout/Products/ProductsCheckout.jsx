@@ -17,34 +17,26 @@ import {
   PriceTotalStyled,
 } from './ProductsCheckoutStyles';
 
-const ProductsCheckout = () => {
-
-  const {cartItems, shippingCost} = useSelector(state => state.cart)
-
-  const totalPrice = cartItems.reduce((acc, item) => {
-    return (acc += item.price * item.quantity);
-  }, 0);
+const ProductsCheckout = ({ cartItems, shippingCost, price}) => {
  
   return (
     <ProductosContainerStyled>
       <ProductsTitleStyled>Tu pedido</ProductsTitleStyled>
       <CardsWrapperStyled>
        {
-        cartItems.length ? (
+        cartItems?.length ? (
           cartItems.map(item => <CardProductCheckout key={item.id} {...item} />)
           ): ( 
             <>
             <p>No seas amarrete, compra algo.</p>
             <Link/>
             </>
-          )
-        
-       }
+          )}
       </CardsWrapperStyled>
       <PriceContainerStyled>
         <SubtotalStyled>
           <p>Subtotal</p>
-          <span>{formatPrice(totalPrice)}</span>
+          <span>{formatPrice(price)}</span>
                   </SubtotalStyled>
         <EnvioStyled>
           <p>Envío:</p>
@@ -54,7 +46,7 @@ const ProductsCheckout = () => {
         <TotalStyled>
           <p>Total:</p>
           <PriceTotalStyled>
-            {formatPrice(totalPrice + shippingCost)}
+            {formatPrice(price + shippingCost)}
           </PriceTotalStyled>
         </TotalStyled>
       </PriceContainerStyled>

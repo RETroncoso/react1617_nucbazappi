@@ -32,7 +32,7 @@ export const StyledLink = styled(Link)`
 
 export const ProductsContainerStyled = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 20px;
   flex-wrap: wrap;
 `;
@@ -64,4 +64,5 @@ export const CostoTotalStyled = styled(CostoProductoStyled)`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-weight: bold;
 `;

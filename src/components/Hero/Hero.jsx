@@ -54,7 +54,7 @@ const handlerSubmit = (e, value) => {
       </div>
       <div>
         <img
-          src='https://res.cloudinary.com/dcatzxqqf/image/upload/v1656648434/coding/NucbaZappi/Assets/pizza-hero_enjaeg.png'
+          src='https://res.cloudinary.com/dcatzxqqf/image/upload/v1658797662/coding/NucbaZappi/Assets/pizza-hero_enjaeg_oprhww.png'
           alt=''
         />
       </div>

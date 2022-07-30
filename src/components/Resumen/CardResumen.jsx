@@ -1,27 +1,27 @@
 import React from 'react';
+import { formatPrice } from '../../utils/formatPrice';
 import {
   ProductLeftStyled,
   ProductPriceStyled,
   ProductStyled,
 } from './CardResumenStyles';
 
-const CardResumen = () => {
+const CardResumen = ({title, desc, quantity, img, price}) => {
   return (
     <ProductStyled>
       <ProductLeftStyled>
         <img
-          src='https://res.cloudinary.com/dcatzxqqf/image/upload/v1656648432/coding/NucbaZappi/Assets/Bennazianna_t40kz2.png'
-          alt=''
+          src={img}
+          alt={title}
         />
         <div>
-          <h3>Pizza Bennazianna</h3>
-          <p>Casera a la piedra, muzarella, jamón, morrón asado, huevo.</p>
+          <h3>{title}</h3>
+          <p>{desc}</p>
         </div>
       </ProductLeftStyled>
       <div>
-        <p>3U</p>
-        <p>#0002617</p>
-        <ProductPriceStyled>$3500</ProductPriceStyled>
+        <p>{quantity}U</p>
+        <ProductPriceStyled> {formatPrice(price * quantity)} </ProductPriceStyled>
       </div>
     </ProductStyled>
   );

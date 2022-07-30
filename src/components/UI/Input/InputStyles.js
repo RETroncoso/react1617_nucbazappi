@@ -28,6 +28,17 @@ export const InputStyled = styled.input`
   color: white;
   width: 70%;
   margin-top: 1rem;
+
+  ::placeholder {
+    opacity: 60%;
+  }
+  -webkit-text-fill-color: white;
+
+  :-webkit-autofill,
+  :-webkit-autofill:hover,
+  :-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px var(--gray-bg) inset;
+  }
 `;
 
 export const ErrorMessageStyled = styled.p`

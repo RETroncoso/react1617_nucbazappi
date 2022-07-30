@@ -19,7 +19,7 @@ function Routes() {
       <Route path='/forgot-password' element={<ForgotPassword />} />
       <Route path='/mis-ordenes' element={<MisOrdenes />} />
       <Route path='/felicitaciones' element={<Felicitaciones />} />
-      <Route path='/resumen' element={<Resumen />} />
+      <Route path='/resumen/:orderId' element={<Resumen />} />
 
       <Route
         path='/checkout'
