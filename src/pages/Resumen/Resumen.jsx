@@ -24,6 +24,7 @@ const Resumen = () => {
   const orders = useSelector(state => state.orders.orders);
   const dispatch = useDispatch();
   const {orderId} = useParams()
+  
 
   console.log(orderId);
 
